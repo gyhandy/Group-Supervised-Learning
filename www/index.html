@@ -1,0 +1,221 @@
+<html>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<style>
+
+h1 {
+  padding-top: 0px;
+  color: #990000;
+  margin: 0px;
+  padding-top: 10px;
+  padding-left: 10px;
+  border-top: solid 1px  #990000;
+}
+
+h2 {
+  padding-left: 20px;
+  color: #990000;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+  font-size: x-large;
+}
+
+p {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+div.content {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+div.profile {
+  position: relative;
+  display: inline-block;
+  height: 100px;
+  width: 250px;
+  border: solid 1px #990000;
+  padding: 5px;
+  vertical-align: middle;
+  margin-top: 5px;
+}
+div.profile:hover {
+  background-color: #990000;
+}
+
+div.profile span.name {
+  position: absolute;
+  top: 20px;
+  left: 120px;
+}
+
+div.profile img.photo {
+  height: 100px;
+}
+
+a {
+  color: #990001;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #990000;
+}
+
+a.link:hover {
+  color: white;
+  background-color: #990000;
+}
+
+table {
+  padding: 10px;
+}
+table tr.head td {
+  border-bottom: solid 1px #990000;
+  font-weight: bold;
+}
+table tr.foot td {
+  border-top: solid 1px #990000;
+  font-weight: bold;
+}
+table tr:nth-child(even) {
+  background: rgba(153, 0, 0, 0.2);
+}
+td {
+  padding: 3px;
+}
+
+td.subtitle {
+  background-color: #990000;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+
+}
+
+
+ul {
+  padding-left: 10px;
+}
+
+
+/** For tooltip **/
+
+.tooltip {
+  /*position: relative; */
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: #990000;
+  font-weight: bold;
+  color: white;
+  /* Position the tooltip */
+  position: absolute;
+	left:20px;
+  right:20px;
+
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+</style>
+
+<head>
+<title>Group-Supervised Learning for Zero-Shot Synthesis (ICLR 2021)</title>
+</head>
+
+<img src='usc.svg' height=40px style="position: absolute; left:10px; top:10px;"/>
+<img src='ICLR-logo.svg' height=50px style="position: absolute; right:10px; top:0px;"/>
+
+<div style="position: absolute; top: 60px">
+
+<h1>Group-Supervised Learning for Zero-Shot Synthesis (ICLR 2021)</h1>
+
+<p>
+<a style='left-padding: 20px' href='https://openreview.net/pdf?id=8wqCDnBmnrT'>[Paper]</a>
+<a style='left-padding: 20px' href=''>[Code]</a>
+<a style='left-padding: 20px' href='http://ilab.usc.edu/datasets/fonts'>[Fonts Dataset]</a>
+</p>
+
+<p>
+We are:
+<!--<br/> -->
+<table border=0 cellspacing=10pt>
+<tr>
+<td style="text-align: center;"><img src='andy.png' height=80px><br/>Yunhao (Andy)</td>
+<td style="text-align: center;"><img src='sami.png' height=80px><br/>Sami</td>
+<td style="text-align: center;"><img src='gan.png' height=80px><br/>Gan</td>
+<td style="text-align: center;"><img src='itti.png' height=80px><br/>Laurent</td>
+</tr>
+</table>
+
+<p>
+<b>Zero-shot Synthesis</b>
+is the process of creating (synthesizing) a photo that has not been seen before (zero-shot).
+We formalize a method that allows for <b>controllable</b> synthesis, next.
+</p>
+<p>
+Our method accepts a <b>query</b> where each attribute is given <b>by example</b>:
+<br/>
+<img src='fig_syn.png' width="800px" style="padding-left:50px"/>
+<br/>
+<i><u>Figure 1: Zero-Shot Synthesis</u></i>. For instance, look at (b) of above:
+user synthesizes image (b, top) with <b>query</b> of: <i>face identity of Image-1</i>, looking in the <i>direction (pose) as Image-2</i>, and with <i>facial expression as Image-3</i>
+</p>
+<p>
+<b>Group-Supervised Learning (GSL)</b> is an approach that can be used for Zero-shot Synthesis.
+Learning signal is derived from (batches of) groups of <i>semantically-related examples</i>.
+These semantic relations can be represented as a <b>(multi-)graph</b>:
+<br/>
+<img src='multigraph-construction.png' width="800px" style="padding-left:50px"/>
+<br/>
+<i><u>Figure 2: Multigraph Construction</u></i>.
+<b>Left</b>: Dataset of examples, where each example has attribute classes (e.g., <i>letter</i>, <i>size</i>, <i>font color</i>) and their corresponding values (e.g., <i>A</i>, <i>large</i>, <i>red</i>),
+gets converted into multigraph, <b>Right</b>, where a pair of examples will be connected with zero-or-more edges, one edge for each shared attribute value. The learning algorithm utilizes the multigraph. The sets <b>S1</b> (blue) and <b>S2</b> (green) both <b><u>cover</u></b> example <b>(i)</b>. In particular, all attributes of image <b>(i)</b> are contained in the union of images in <b>S1</b> (and also in <b>S2</b>) - we term <b>S1</b> and <b>S2</b> as <i>cover sets</i> for image <b>(i)</b>.
+<br/><br/>
+Our general learning framework (GSL) can be intuitively explained as follows:
+since all attributes of image <b>(i)</b> are present in set <b>S1</b>, then we
+should be able to re-construct <b>(i)</b> solely from <b>S1</b>.
+</p>
+
+<p>
+<b>Zero-shot Synthesis Network (GZS-Net)</b>
+is a neural network based on auto-encoders. We train it on <i>simple</i> <b>cover sets</b>, like (green) <b>S2</b> that contain (i) and one more example sharing an attribute with  (i). The overall training pipeline includes 3 loss terms:
+<ol>
+<li><b>Reconstruction</b>: Auto-encoder loss (single image reconstruction, samples training images uniformly, without using multigraph).</li>
+<li><b>One-overlap Attribute Swap</b>: If two images share an attribute value, these two images must be able to <u>prove it</u>. Specifically, they should be able to reconstruct themselves even if we swap latent values corresponding to the attribute class. This can be acheived by sampling one edge from the multigraph.</li>
+<li><b>Cycle Attribute Swap</b>: Samples two images (regardless if they share any attributes) and ensures that can be reconstructed after a double-swap on any attribute class (see paper for details).</li>
+</ol>
+<img src="training.png" width='800px' style="padding-left:50px"/>
+</p>
+
+<p>
+<b>Got Questions?</b> We would love to answer them! Please reach out by email!
+You may cite us in your research as:
+<pre style='padding-left:50px'>
+@inproceedings{ge2021zeroshot,
+  title={Zero-shot Synthesis with Group-Supervised Learning},
+  author={Yunhao Ge and Sami Abu-El-Haija and Gan Xin and Laurent Itti},
+  booktitle={International Conference on Learning Representations},
+  year={2021},
+  url={https://openreview.net/forum?id=8wqCDnBmnrT}
+}
+</pre>
+</p>
+
+</html>
