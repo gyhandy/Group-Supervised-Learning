@@ -24,9 +24,20 @@ body {
   font-size: x-large;
 }
 
-p {
-  padding-left: 40px;
-  padding-right: 40px;
+div.p {
+  padding: 10px;
+  /*background-color:gray;*/
+  margin-right:40px;
+  margin-left:40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border:8px outset #999;
+  -webkit-box-shadow: 0 0 10px rgb(0,0,0);
+  -moz-box-shadow: 0 0 10px rgb(0,0,0);
+}
+
+div.p h2 {
+  margin: 10pt 0pt 8pt 0pt;
 }
 
 div.content {
@@ -146,39 +157,44 @@ ul {
 
 <h1>Group-Supervised Learning for Zero-Shot Synthesis (ICLR 2021)</h1>
 
-<p>
-<a style='left-padding: 20px' href='https://openreview.net/pdf?id=8wqCDnBmnrT'>[Paper]</a>
-<a style='left-padding: 20px' href=''>[Code]</a>
-<a style='left-padding: 20px' href='http://ilab.usc.edu/datasets/fonts'>[Fonts Dataset]</a>
-</p>
+<div class=p  style="text-align: center">
+  Our paper has been accepted to ICLR'21!
+  <br>
+  Links:
+<a style='margin-left: 20px' href='https://openreview.net/pdf?id=8wqCDnBmnrT'>[Paper]</a>
+<a style='margin-left: 20px' href=''>[Code]</a>
+<a style='margin-left: 20px' href='http://ilab.usc.edu/datasets/fonts'>[Fonts Dataset]</a>
 
-<p>
-We are:
-<!--<br/> -->
-<table border=0 cellspacing=10pt>
-<tr>
-<td style="text-align: center;"><img src='andy.png' height=80px><br/>Yunhao (Andy)</td>
-<td style="text-align: center;"><img src='sami.png' height=80px><br/>Sami</td>
-<td style="text-align: center;"><img src='gan.png' height=80px><br/>Gan</td>
-<td style="text-align: center;"><img src='itti.png' height=80px><br/>Laurent</td>
-</tr>
-</table>
+<br>
+    <table border=0 cellspacing=10pt align=center>
+    <tr>
+    <td style="text-align: center;"><img src='andy.png' height=80px><br/>Yunhao (Andy)</td>
+    <td style="text-align: center;"><img src='sami.png' height=80px><br/>Sami</td>
+    <td style="text-align: center;"><img src='gan.png' height=80px><br/>Gan</td>
+    <td style="text-align: center;"><img src='itti.png' height=80px><br/>Laurent</td>
+    </tr>
+    </table>
+</div>
 
-<p>
+<div class=p>
+  <h2 align=center>Zero-shot Synthesis</h2>
 <b>Zero-shot Synthesis</b>
 is the process of creating (synthesizing) a photo that has not been seen before (zero-shot).
 We formalize a method that allows for <b>controllable</b> synthesis, next.
-</p>
-<p>
+
+<br><br>
+
 Our method accepts a <b>query</b> where each attribute is given <b>by example</b>:
 <br/>
 <img src='fig_syn.png' width="800px" style="padding-left:50px"/>
 <br/>
 <i><u>Figure 1: Zero-Shot Synthesis</u></i>. For instance, look at (b) of above:
 user synthesizes image (b, top) with <b>query</b> of: <i>face identity of Image-1</i>, looking in the <i>direction (pose) as Image-2</i>, and with <i>facial expression as Image-3</i>
-</p>
-<p>
-<b>Group-Supervised Learning (GSL)</b> is an approach that can be used for Zero-shot Synthesis.
+</div>
+
+<div class=p>
+    <h2 align=center>Group-Supervised Learning (GSL)</h2>
+<b>GSL</b> is an approach that can be used for Zero-shot Synthesis.
 Learning signal is derived from (batches of) groups of <i>semantically-related examples</i>.
 These semantic relations can be represented as a <b>(multi-)graph</b>:
 <br/>
@@ -191,10 +207,11 @@ gets converted into multigraph, <b>Right</b>, where a pair of examples will be c
 Our general learning framework (GSL) can be intuitively explained as follows:
 since all attributes of image <b>(i)</b> are present in set <b>S1</b>, then we
 should be able to re-construct <b>(i)</b> solely from <b>S1</b>.
-</p>
+</div>
 
-<p>
-<b>Zero-shot Synthesis Network (GZS-Net)</b>
+<div class=p>
+<h2 align=center>Zero-shot Synthesis Network (GZS-Net)</h2>
+<b>GZS-Net</b>
 is a neural network based on auto-encoders. We train it on <i>simple</i> <b>cover sets</b>, like (green) <b>S2</b> that contain (i) and one more example sharing an attribute with  (i). The overall training pipeline includes 3 loss terms:
 <ol>
 <li><b>Reconstruction</b>: Auto-encoder loss (single image reconstruction, samples training images uniformly, without using multigraph).</li>
@@ -202,9 +219,10 @@ is a neural network based on auto-encoders. We train it on <i>simple</i> <b>cove
 <li><b>Cycle Attribute Swap</b>: Samples two images (regardless if they share any attributes) and ensures that can be reconstructed after a double-swap on any attribute class (see paper for details).</li>
 </ol>
 <img src="training.png" width='800px' style="padding-left:50px"/>
-</p>
+</div>
 
-<p>
+<div class=p>
+    <h2 align=center>Contact / Cite</h2>
 <b>Got Questions?</b> We would love to answer them! Please reach out by email!
 You may cite us in your research as:
 <pre style='padding-left:50px'>
@@ -216,6 +234,6 @@ You may cite us in your research as:
   url={https://openreview.net/forum?id=8wqCDnBmnrT}
 }
 </pre>
-</p>
+</div>
 
 </html>
