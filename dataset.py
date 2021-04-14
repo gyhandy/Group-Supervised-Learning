@@ -58,11 +58,11 @@ class ilab_imgfolder(Dataset):
             FOUNDED = True
             C_img_path = self.paths[index % self.C_size]
 
-            C_pose_root = C_img_path.split('/')[5]
+            C_pose_root = C_img_path.split('/')[-2]
             C_pose = C_pose_root.replace('_', '-')
-            C_category = C_img_path.split('/')[6].split('-')[0]
-            C_identity = C_img_path.split('/')[6].split('-')[1]
-            C_back = C_img_path.split('/')[6].split('-')[2]
+            C_category = C_img_path.split('/')[-1].split('-')[0]
+            C_identity = C_img_path.split('/')[-1].split('-')[1]
+            C_back = C_img_path.split('/')[-1].split('-')[2]
 
             # B has same identity as C
             B_root = self.root.replace('train_img_c00_10class', 'vae_identity_new')
@@ -363,17 +363,18 @@ class Fonts_imgfolder(Dataset):
         return self.C_size
 
 class rafd_imgfolder(Dataset):
-    def __init__(self, root, transform=None):
+    def __init__(self, root, transform=None, train=True):
         super(rafd_imgfolder, self).__init__()
+        self.train = train
         self.root = root
         self.transform = transform
         print(root)
-        self.paths = make_dataset(self.root)
-        file = open('debug.txt','w')
-        file.write(str(self.paths))
-        file.close()
-        self.C_size = len(self.paths)-1
-        print(self.C_size)
+        if self.train:
+            self.paths = make_dataset(self.root)
+            self.C_size = len(self.paths) # size of center image C
+        else: # test mode
+            self.C_size, self.paths = group_path(self.root) # size of center image C
+            print(self.C_size, self.paths, self.root)
 
 
 
@@ -395,9 +396,9 @@ class rafd_imgfolder(Dataset):
             local
             '''
 
-            C_pose = C_img_path.split('/')[8].split('_')[1]
-            C_identity = C_img_path.split('/')[8].split('_')[0]
-            C_expression = C_img_path.split('/')[8].split('_')[2].split('.')[0]
+            C_pose = C_img_path.split('/')[-1].split('_')[1]
+            C_identity = C_img_path.split('/')[-1].split('_')[0]
+            C_expression = C_img_path.split('/')[-1].split('_')[2].split('.')[0]
 
             B_root = self.root.replace('data', 'img_id')
             # B has same identity
@@ -481,28 +482,54 @@ class rafd_imgfolder(Dataset):
 
         return A_img_path, B_img_path, C_img_path, D_img_path, E_img_path
 
+    def findtest(self, index):
+        '''
+        A: id provider
+        B: pose provider
+        D: expression provider
+        '''
+        group_path = self.paths[index]
+        A_img_path = os.path.join(group_path, 'identity.png')
+        B_img_path = os.path.join(group_path, 'pose.png')
+        D_img_path = os.path.join(group_path, 'expression.png')
+        return A_img_path, B_img_path, D_img_path
+
     def __getitem__(self, index):
-        '''there is a big while loop for choose category and training'''
-        A_img_path, B_img_path, C_img_path, D_img_path, E_img_path = self.findABD(index)
-        # A_img_path, B_img_path, C_img_path, D_img_path, E_img_path = self.find_test(index)
+        if self.train:
+            '''there is a big while loop for choose category and training'''
+            A_img_path, B_img_path, C_img_path, D_img_path, E_img_path = self.findABD(index)
+            # A_img_path, B_img_path, C_img_path, D_img_path, E_img_path = self.find_test(index)
 
-        A_img = Image.open(A_img_path).convert('RGB')
-        B_img = Image.open(B_img_path).convert('RGB')
-        C_img = Image.open(C_img_path).convert('RGB')
-        D_img = Image.open(D_img_path).convert('RGB')
-        E_img = Image.open(E_img_path).convert('RGB')
+            A_img = Image.open(A_img_path).convert('RGB')
+            B_img = Image.open(B_img_path).convert('RGB')
+            C_img = Image.open(C_img_path).convert('RGB')
+            D_img = Image.open(D_img_path).convert('RGB')
+            E_img = Image.open(E_img_path).convert('RGB')
 
-        if self.transform is not None:
-            A = self.transform(A_img)
-            B = self.transform(B_img)
-            C = self.transform(C_img)
-            D = self.transform(D_img)
-            E = self.transform(E_img)
+            if self.transform is not None:
+                A = self.transform(A_img)
+                B = self.transform(B_img)
+                C = self.transform(C_img)
+                D = self.transform(D_img)
+                E = self.transform(E_img)
 
-        return {'A': A, 'B': B, 'C': C, 'D': D, 'E': E}
+            return {'A': A, 'B': B, 'C': C, 'D': D, 'E': E}
+        else: # test
+            A_img_path, B_img_path, D_img_path = self.findtest(index)
+            A_img = Image.open(A_img_path).convert('RGB')
+            B_img = Image.open(B_img_path).convert('RGB')
+            D_img = Image.open(D_img_path).convert('RGB')
+
+            if self.transform is not None:
+                A = self.transform(A_img)
+                B = self.transform(B_img)
+                D = self.transform(D_img)
+
+            return {'A': A, 'B': B, 'D': D}
+
 
     def __len__(self):
-        return self.C_size - 1
+        return self.C_size
 
 
 class dsprites_imgfolder(Dataset):
@@ -672,7 +699,6 @@ class dsprites_imgfolder(Dataset):
         return self.C_size
 
 
-
 class ilab_cumstom_imgfolder(Dataset):
     def __init__(self, root, transform=None):
         super(ilab_cumstom_imgfolder, self).__init__()
@@ -832,7 +858,7 @@ def return_data(args):
         if train: # train mode
             root = args.dataset_path
         else: # test mode
-            root = args.test_img_path
+            root = os.path.join(args.test_img_path, name.lower())
         if not os.path.exists(root):
             print('No ilab-20M dataset')
         transform = [] # train test use same transform
@@ -847,7 +873,7 @@ def return_data(args):
         if train: # train mode
             root = args.dataset_path
         else: # test mode
-            root = args.test_img_path
+            root = os.path.join(args.test_img_path, name.lower())
         if not os.path.exists(root):
             print('No fonts dataset')
         transform = []
@@ -861,7 +887,7 @@ def return_data(args):
         if train: # train mode
             root = args.dataset_path
         else: # test mode
-            root = args.test_img_path
+            root = os.path.join(args.test_img_path, name.lower())
         if not os.path.exists(root):
             print('No rafd dataset')
         transform = []
@@ -877,7 +903,7 @@ def return_data(args):
         if train: # train mode
             root = args.dataset_path
         else: # test mode
-            root = args.test_img_path
+            root = os.path.join(args.test_img_path, name.lower())
         if not os.path.exists(root):
             print('No dsprites dataset')
         transform = []
@@ -890,7 +916,7 @@ def return_data(args):
         if train: # train mode
             root = args.dataset_path
         else: # test mode
-            root = args.test_img_path
+            root = args.os.path.join(args.test_img_path, name.lower())
         if not os.path.exists(root):
             print('No ilab-20M-custom dataset')
         transform = [] # train test use same transform

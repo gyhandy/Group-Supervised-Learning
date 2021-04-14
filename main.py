@@ -52,7 +52,7 @@ if __name__ == "__main__":
     Need modify base on your dataset
     '''
     parser.add_argument('--train', default=False, type=str2bool, help='train: True or test: False')
-    parser.add_argument('--dataset', default='dsprite', type=str, help='dataset name:[ilab_20M, Fonts, RaFD, dsprite, ilab_20M_custom]')
+    parser.add_argument('--dataset', default='dsprites', type=str, help='dataset name:[ilab_20M, Fonts, RaFD, dsprites, ilab_20M_custom]')
     # parser.add_argument('--dataset_path', default='/home2/andy/ilab2M_pose/train_img_c00_10class', type=str, help='dataset path')
     # parser.add_argument('--dataset_path', default='/lab/tmpig23b/u/gan/fonts_dataset_center', type=str,
     #                     help='dataset path')
@@ -64,14 +64,13 @@ if __name__ == "__main__":
     # '/home2/andy/dsprites_dataset'
     parser.add_argument('--resume_iters', type=int, default=0, help='resume training from this step, e,g, 10000 or test model selection')
     parser.add_argument('--viz_name', default='dsprites', type=str, help='visdom env name')
-    # parser.add_argument('--crop_size', type=int, default=208, help='crop size for the dataset')
     parser.add_argument('--image_size', type=int, default=128, help='crop size for the ilab dataset')
-    parser.add_argument('--pretrain_model_path', default='./checkpoints/pretrained_models/fonts.ckpt', type=str,
-                        help='pretrain model path')
-    parser.add_argument('--test_img_path', default='./checkpoints/test_imgs/fonts', type=str,
+    parser.add_argument('--pretrain_model_path', default='./checkpoints/pretrained_models/dsprites.ckpt', type=str,
                         help='pretrain model path')
 
 
+    parser.add_argument('--test_img_path', default='./checkpoints/test_imgs/', type=str,
+                        help='pretrain model path')
     parser.add_argument('--seed', default=1, type=int, help='random seed')
     parser.add_argument('--cuda', default=True, type=str2bool, help='enable cuda')
     parser.add_argument('--max_iter', default=1e7, type=float, help='maximum training iteration')
@@ -96,9 +95,9 @@ if __name__ == "__main__":
     # parser.add_argument('--model_save_dir', default='checkpoints', type=str, help='output directory')
     parser.add_argument('--model_save_dir', default='/lab/tmpig23b/u/andy/Group_Supervised_Learning', type=str, help='output directory')
 
-    parser.add_argument('--gather_step', default=1000, type=int, help='numer of iterations after which data is gathered for visdom')
-    parser.add_argument('--display_step', default=1000, type=int, help='number of iterations after which loss data is printed and visdom is updated')
-    parser.add_argument('--save_step', default=5000, type=int, help='number of iterations after which a checkpoint is saved')
+    parser.add_argument('--gather_step', default=5000, type=int, help='numer of iterations after which data is gathered for visdom')
+    parser.add_argument('--display_step', default=5000, type=int, help='number of iterations after which loss data is printed and visdom is updated')
+    parser.add_argument('--save_step', default=10000, type=int, help='number of iterations after which a checkpoint is saved')
     parser.add_argument('--ckpt_dir', default='checkpoints', type=str, help='checkpoint directory')
     args = parser.parse_args()
 

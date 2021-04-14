@@ -19,6 +19,7 @@ term **Group-Supervised Learning** (GSL).
 GSL allows us to decompose inputs into a disentangled representation with swappable components, that can be recombined to synthesize new samples.
 (*i.e.*, images of red boats & blue cars can be decomposed and recombined to synthesize novel images of red cars.
 
+[We are actively updating the code]
 <img src='docs/Fig-2.png'>
 
 ## Getting Started
@@ -67,7 +68,7 @@ After preprocess, please update the dataset path in '--dataset_path' parameter
 
 ### Synthesis with pretrained model
 
-You can download the pretrained models of ilab-20M, Fonts, RaFD and dsprites here  [pretrained models](http://ilab.usc.edu/datasets/pretrained_models.zip)
+You can download the pretrained models of ilab-20M, Fonts, RaFD and dsprites here  [pretrained models](http://ilab.usc.edu/datasets/GSL_pretrained_models.zip) and put them to `./checkpoints/pretrained_models`
 The sample test images are in the `./checkpoints/test_imgs`
 You can use the following sample commands to synthesize zero-shot images with our pretrained models:
 - For Fonts
@@ -83,6 +84,11 @@ python3 main.py --train False --dataset ilab-20M --pretrain_model_path YOUR_LOCA
 - For RaFD
 ```bash
 python3 main.py --train False --dataset RaFD --pretrain_model_path YOUR_LOCAL_PATH_OF_PRETRAINED_MODEL --test_img_path './checkpoints/test_imgs/rafd' --viz_name rafd
+```
+
+- For dsprites
+```bash
+python3 main.py --train False --dataset dsprites--pretrain_model_path YOUR_LOCAL_PATH_OF_PRETRAINED_MODEL --test_img_path './checkpoints/test_imgs/dsprites' --viz_name dsprites
 ```
 
 ### Train GZS-Net on datasets used in paper
@@ -106,6 +112,10 @@ python3 main.py --train True --dataset ilab-20M --dataset_path YOUR_LOCAL_PATH_O
 python3 main.py --train True --dataset RaFD --dataset_path YOUR_LOCAL_PATH_OF_RaFD --viz_name rafd
 ```
 
+- For dsprites
+```bash
+python3 main.py --train True --dataset dsprites--dataset_path YOUR_LOCAL_PATH_OF_DSPRITES --viz_name dsprites
+```
 ### Train GZS-Net on your own dataset
 
 To use our GZS-Net on you own dataset, before training, please refer the admissible dataset description in our paper.
@@ -125,11 +135,12 @@ python3 train.py  --dataset ilab_20M_custom --dataset_path YOUR_LOCAL_PATH_OF_CU
 ## Citation
 If you use this code for your research, please cite our papers.
 ```
-@article{ge2020zero,
+@inproceedings{ge2021zeroshot,
   title={Zero-shot Synthesis with Group-Supervised Learning},
-  author={Ge, Yunhao and Abu-El-Haija, Sami and Xin, Gan and Itti, Laurent},
-  journal={arXiv preprint arXiv:2009.06586},
-  year={2020}
+  author={Yunhao Ge and Sami Abu-El-Haija and Gan Xin and Laurent Itti},
+  booktitle={International Conference on Learning Representations},
+  year={2021},
+  url={https://openreview.net/forum?id=8wqCDnBmnrT}
 }
 ```
 
