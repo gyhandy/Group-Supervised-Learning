@@ -10,8 +10,8 @@ Test image (attributes are a query).*
 > Yunhao Ge, Sami Abu-El-Haija, Gan Xin, Laurent Itti <br>
 > *International Conference on Learning Representations (ICLR), 2021*
 
-[[Paper](https://arxiv.org/pdf/2009.06586.pdf)]
-[[Project Page](https://github.com/gyhandy/Group-Supervised-Learning)]
+[[Paper](https://openreview.net/pdf?id=8wqCDnBmnrT)]
+[[Project Page](http://sami.haija.org/iclr21gsl)]
 [[Fonts dataset](http://ilab.usc.edu/datasets/fonts)]
 
 To aid neural networks to envision objects with different attributes, we propose a family of objective functions, expressed on *groups of examples*, as a *novel learning framework* that we
