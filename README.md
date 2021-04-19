@@ -45,7 +45,7 @@ cd pytorch-CycleGAN-and-pix2pix
 - iLab-20M, is an attributed dataset containing images of toy vehicles placed
 on a turntable using 11 cameras at different viewing points. There are 3 attribute classes: vehicle
 identity: 15 categories, each having 25-160 instances; pose; and backgrounds: over 14 for each
-identity: projecting vehicles in relevant contexts. You can download a subset of iLab-20M that we used in our paper here: [iLab-6pose](http://ilab.usc.edu/datasets/fonts)
+identity: projecting vehicles in relevant contexts. You can download a subset of iLab-20M that we used in our paper here: [iLab-6pose](http://ilab.usc.edu/datasets/iLab_6pose.zip)
 
 - Fonts, is a computer-generated RGB image datasets. Each image, with 128 * 128 pixels, contains an alphabet letter rendered using 5 independent generating attributes: letter identity, size, font color, background color and font.
 you can download the fonts dataset at here: [Fonts](http://ilab.usc.edu/datasets/fonts).
