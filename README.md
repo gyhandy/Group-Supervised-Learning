@@ -45,10 +45,10 @@ cd pytorch-CycleGAN-and-pix2pix
 - iLab-20M, is an attributed dataset containing images of toy vehicles placed
 on a turntable using 11 cameras at different viewing points. There are 3 attribute classes: vehicle
 identity: 15 categories, each having 25-160 instances; pose; and backgrounds: over 14 for each
-identity: projecting vehicles in relevant contexts. You can download a subset of iLab-20M that we used in our paper here: [iLab-6pose](http://ilab.usc.edu/datasets/iLab_6pose.zip)
+identity: projecting vehicles in relevant contexts. You can download a subset of iLab-20M that we used in our paper here: [iLab-6pose](http://ilab.usc.edu/datasets/iLab_6pose.zip) [http://ilab.usc.edu/datasets/iLab_6pose.zip]
 
 - Fonts, is a computer-generated RGB image datasets. Each image, with 128 * 128 pixels, contains an alphabet letter rendered using 5 independent generating attributes: letter identity, size, font color, background color and font.
-you can download the fonts dataset at here: [Fonts](http://ilab.usc.edu/datasets/fonts).
+you can download the fonts dataset at here: [Fonts](http://ilab.usc.edu/datasets/fonts) [http://ilab.usc.edu/datasets/fonts].
 
 - RaFD contains pictures of 67 models displaying 8 emotional expressions taken by 5 different camera angles simultaneously. There are 3 attributes: identity, camera position (pose), and expression.
 To download the RaFD dataset, you must request access to the dataset from [the Radboud Faces Database website](http://www.socsci.ru.nl:8180/RaFD2/RaFD?p=main). 
@@ -68,7 +68,7 @@ After preprocess, please update the dataset path in '--dataset_path' parameter
 
 ### Synthesis with pretrained model
 
-You can download the pretrained models of ilab-20M, Fonts, RaFD and dsprites here  [pretrained models](http://ilab.usc.edu/datasets/GSL_pretrained_models.zip) and put them to `./checkpoints/pretrained_models`
+You can download the pretrained models of ilab-20M, Fonts, RaFD and dsprites here  [pretrained models](http://ilab.usc.edu/datasets/GSL_pretrained_models.zip) (http://ilab.usc.edu/datasets/GSL_pretrained_models.zip) and put them to `./checkpoints/pretrained_models`
 The sample test images are in the `./checkpoints/test_imgs`
 You can use the following sample commands to synthesize zero-shot images with our pretrained models:
 - For Fonts

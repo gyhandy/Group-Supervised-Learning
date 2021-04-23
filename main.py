@@ -52,20 +52,12 @@ if __name__ == "__main__":
     Need modify base on your dataset
     '''
     parser.add_argument('--train', default=False, type=str2bool, help='train: True or test: False')
-    parser.add_argument('--dataset', default='dsprites', type=str, help='dataset name:[ilab_20M, Fonts, RaFD, dsprites, ilab_20M_custom]')
-    # parser.add_argument('--dataset_path', default='/home2/andy/ilab2M_pose/train_img_c00_10class', type=str, help='dataset path')
-    # parser.add_argument('--dataset_path', default='/lab/tmpig23b/u/gan/fonts_dataset_center', type=str,
-    #                     help='dataset path')
-    parser.add_argument('--dataset_path', default='/home2/dsprites_dataset', type=str,
-                        help='dataset path')
-    # '/lab/tmpig23b/u/gan/RaFD/train/data/'
-    # '/lab/tmpig23b/u/gan/fonts_dataset_center'
-    # '/lab/tmpig23b/u/andy/ilab2M_pose/train_img_c00_10class'
-    # '/home2/andy/dsprites_dataset'
+    parser.add_argument('--dataset', default='ilab_20M', type=str, help='dataset name:[ilab_20M, Fonts, RaFD, dsprites, ilab_20M_custom]')
+    parser.add_argument('--dataset_path', default='/home2/andy/ilab2M_pose/train_img_c00_10class', type=str, help='dataset path')
     parser.add_argument('--resume_iters', type=int, default=0, help='resume training from this step, e,g, 10000 or test model selection')
-    parser.add_argument('--viz_name', default='dsprites', type=str, help='visdom env name')
+    parser.add_argument('--viz_name', default='ilab_20M', type=str, help='visdom env name')
     parser.add_argument('--image_size', type=int, default=128, help='crop size for the ilab dataset')
-    parser.add_argument('--pretrain_model_path', default='./checkpoints/pretrained_models/dsprites.ckpt', type=str,
+    parser.add_argument('--pretrain_model_path', default='./checkpoints/pretrained_models/ilab_20M.ckpt', type=str,
                         help='pretrain model path')
 
 

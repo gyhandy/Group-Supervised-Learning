@@ -625,7 +625,7 @@ class Solver(object):
         elif mode == 'test':
             image_AaBpDb_2N = image
             image_AaBpDb_2N = unloader(image_AaBpDb_2N)
-            image_AaBpDb_2N.save(os.path.join(self.output_dir, 'group{}-AaBpDb_2N.png'.format(self.test_iter)))
+            image_AaBpDb_2N.save(os.path.join(self.output_dir, 'group{}-AaBpDb_2N.png'.format(self.test_iter +1)))
     def ilab20m_viz_reconstruction(self):
         # self.net_mode(train=False)
         x_A = self.gather.data['images'][0][:100]
@@ -1026,7 +1026,7 @@ class Solver(object):
         elif mode == 'test':
             image_A2B3D4E5F1_2N = image
             image_A2B3D4E5F1_2N = unloader(image_A2B3D4E5F1_2N)
-            image_A2B3D4E5F1_2N.save(os.path.join(self.output_dir, 'group{}-image_A2B3D4E5F1_2N.png'.format(self.test_iter)))
+            image_A2B3D4E5F1_2N.save(os.path.join(self.output_dir, 'group{}-image_A2B3D4E5F1_2N.png'.format(self.test_iter +1)))
     def fonts_viz_reconstruction(self):
         # self.net_mode(train=False)
         x_A = self.gather.data['images'][0][:100]
